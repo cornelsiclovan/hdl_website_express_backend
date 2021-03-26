@@ -1,0 +1,4 @@
+{
+    "jwtPrivateKey": "dragoi",
+    "db": "mongodb://localhost/hdl_db"
+}
