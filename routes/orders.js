@@ -15,6 +15,15 @@ Fawn.init(mongoose);
 router.get('/', async (req, res) => {
     
     const orders = await Order.find();
+ 
+    res.send(orders);
+});
+
+router.get('/:id', async (req, res) => {
+
+    const orderId = req.params.id;
+    
+    const orders = await Order.findById(orderId);
 
     res.send(orders);
 });
