@@ -25,6 +25,7 @@ router.get('/:id', async (req, res) => {
     res.send(product);
 });
 
+
 router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs', maxCount: 12} ]), auth], async (req, res) => {
 
     let picsArray = [];
@@ -40,6 +41,8 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
     const category = await Category.findById(req.body.categoryId);
     if(!category)
         return res.status(400).send('Invalid category.');
+
+    console.log(category);
 
     const type = await Type.findById(req.body.typeId);
     if(!type) 
@@ -67,7 +70,8 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
         type: {
             _id: type._id, 
             name: type.name,
-            description: type.description
+            description: type.description,
+            category: type.category
         }
     });    
 

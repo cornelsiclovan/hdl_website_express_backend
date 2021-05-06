@@ -9,14 +9,14 @@ const productSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 5,
+        minlength: 2,
         maxlength: 100
     },
     description: {
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 255
+        maxlength: 500
     },
     unitsInStock: {
         type: Number,
@@ -79,15 +79,15 @@ const productSchema = new mongoose.Schema({
     type: {
         type: typeSchema,
         required: true
-    }
+    }   
 });
 
 const Product = mongoose.model('Product', productSchema);
 
 function validateProduct(product) {
     const schema = Joi.object({
-        name: Joi.string().min(5).max(100).required(),
-        description: Joi.string().min(5).max(255).required(),
+        name: Joi.string().min(2).max(100).required(),
+        description: Joi.string().min(5).max(500).required(),
         unitsInStock: Joi.number().min(0).max(1000).required(),
         sku: Joi.string().min(5).max(100).required(),
         bus_power: Joi.string().min(1).max(100).required(),
