@@ -5118,3 +5118,110 @@
 {"message":"Cannot read property '0' of undefined","stack":"TypeError: Cannot read property '0' of undefined\n    at D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\routes\\types.js:25:50","level":"error","timestamp":"2021-05-06T13:37:30.797Z"}
 {"message":"Cannot read property '0' of undefined","stack":"TypeError: Cannot read property '0' of undefined\n    at D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\routes\\types.js:25:50","level":"error","timestamp":"2021-05-06T13:37:38.050Z"}
 {"message":"Cannot read property '0' of undefined","stack":"TypeError: Cannot read property '0' of undefined\n    at D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\routes\\types.js:25:50","level":"error","timestamp":"2021-05-06T13:37:43.252Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-06T13:46:16.664Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-06T13:46:16.681Z"}
+{"message":"Unexpected token } in JSON at position 287","stack":"SyntaxError: Unexpected token } in JSON at position 287\n    at JSON.parse (<anonymous>)\n    at parse (D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\node_modules\\body-parser\\lib\\types\\json.js:89:19)\n    at D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\node_modules\\body-parser\\lib\\read.js:121:18\n    at invokeCallback (D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\node_modules\\raw-body\\index.js:224:16)\n    at done (D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\node_modules\\raw-body\\index.js:213:7)\n    at IncomingMessage.onEnd (D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\node_modules\\raw-body\\index.js:273:7)\n    at IncomingMessage.emit (node:events:388:22)\n    at endReadableNT (node:internal/streams/readable:1295:12)\n    at processTicksAndRejections (node:internal/process/task_queues:80:21)","expose":true,"statusCode":400,"status":400,"body":"{\r\n        \"name\": \"KNX\",\r\n        \"description\": \"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \",\r\n}","type":"entity.parse.failed","level":"error","timestamp":"2021-05-07T09:24:35.869Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T09:31:41.138Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T09:31:41.169Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T09:31:42.600Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T09:31:42.617Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T09:31:57.697Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T09:31:57.715Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T09:54:57.742Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T09:54:57.760Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T09:55:01.453Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T09:55:01.483Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:13.001Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:13.028Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:14.459Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:14.488Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:22.410Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:22.448Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:23.752Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:23.781Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:27.892Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:27.911Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:29.090Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:29.108Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:31.550Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:31.579Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:33.512Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:33.533Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:35.184Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:35.215Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:04:37.711Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:04:37.730Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:05:42.044Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:05:42.067Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:07:05.398Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:07:05.415Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:07:09.692Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:07:09.710Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:07:24.815Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:07:24.843Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:07:28.524Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:07:28.542Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:09:13.732Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:09:13.750Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:09:18.389Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:09:18.408Z"}
+{"message":"picsArray is not defined","stack":"ReferenceError: picsArray is not defined\n    at D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\routes\\products.js:109:20","level":"error","timestamp":"2021-05-07T10:09:26.889Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:10:00.176Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:10:00.196Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:10:01.447Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:10:01.473Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:49:15.946Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:49:15.981Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:49:17.001Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:49:17.018Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:49:53.022Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:49:53.039Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:49:54.688Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:49:54.712Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:50:03.708Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:50:03.733Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:50:05.354Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:50:05.374Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T10:50:08.030Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T10:50:08.049Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:01.826Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:01.862Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:09.846Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:09.867Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:14.711Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:14.730Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:18.126Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:18.142Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:19.546Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:19.568Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:24.463Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:24.479Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:28.931Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:28.949Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:36.994Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:37.012Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:43.869Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:43.899Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:50.626Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:50.655Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:54.054Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:54.072Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:02:58.258Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:02:58.282Z"}
+{"message":"Cannot read property '0' of undefined","stack":"TypeError: Cannot read property '0' of undefined\n    at D:\\proiecte\\Bogdan Dragoi\\hdlsite\\backend\\routes\\products.js:40:50","level":"error","timestamp":"2021-05-07T11:04:05.451Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:39:02.831Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:39:02.863Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:39:05.514Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:39:05.532Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:39:13.135Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:39:13.152Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:40:16.119Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:40:16.143Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:40:19.823Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:40:19.851Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:40:25.279Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:40:25.296Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:40:48.617Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:40:48.638Z"}
+{"level":"info","message":"Listening on port 3001","timestamp":"2021-05-07T11:41:08.913Z"}
+{"level":"info","message":"Connected to mongodb://localhost/hdl_db...","timestamp":"2021-05-07T11:41:08.930Z"}

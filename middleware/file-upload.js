@@ -5,7 +5,8 @@ const MIME_TYPE_MAP = {
     'image/png': 'png',
     'image/jpeg': 'jpeg',
     'image/jpg': 'jpg',
-    'application/pdf': 'pdf'
+    'application/pdf': 'pdf',
+    'application/zip': 'zip'
 }
 
 const fileUpload = multer({
@@ -25,4 +26,4 @@ const fileUpload = multer({
     })
 });
 
-module.exports = fileUpload;
+module.exports = fileUpload; 
