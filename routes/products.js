@@ -10,8 +10,9 @@ const admin = require('../middleware/admin');
 const fileUpload = require('../middleware/file-upload');
 
 router.get('/', async (req, res) => {
-    
-    const products = await Product.find().sort('title');
+    const page = req.query.page || 1;
+
+    const products = await Product.find().sort('name').limit(4).skip(4*(page-1));
 
     res.send(products);
 });
@@ -24,18 +25,17 @@ router.get('/:id', async (req, res) => {
 
     res.send(product);
 });
-
-
+ 
 router.get('/category/:id', async (req, res) => {
-    
+    const page = req.query.page || 1;
+
     const categoryId = req.params.id;
 
     let products;
 
-   // console.log(categoryId);
 
     try {
-        products = await Product.find({'category._id': categoryId});
+        products = await Product.find({'category._id': categoryId}).sort('name').limit(4).skip(4*(page-1));
     } catch(error) {
         res.send(products);
         //return res.status(404).send("No items found");
@@ -49,15 +49,14 @@ router.get('/category/:id', async (req, res) => {
 });
 
 router.get('/type/:id', async (req, res) => {
+    const page = req.query.page || 1;
     
     const typeId = req.params.id;
 
     let products;
 
-   // console.log(categoryId);
-
     try {
-        products = await Product.find({'type._id': typeId});
+        products = await Product.find({'type._id': typeId}).sort('name').limit(4).skip(4*(page-1));
     } catch(error) {
         return res.status(404).send(error.details[0].message);
     }
@@ -84,8 +83,6 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
     const category = await Category.findById(req.body.categoryId);
     if(!category)
         return res.status(400).send('Invalid category.');
-
-    console.log(category);
 
     const type = await Type.findById(req.body.typeId);
     if(!type) 
