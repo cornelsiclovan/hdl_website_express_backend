@@ -8,6 +8,7 @@ const { User, validate } = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const auth = require('../middleware/auth');
+const HttpError = require('./../models/http-errors');
 
 router.get('/me', auth, async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
     const user = await User.findById(req.body.id);
 });
 
-router.post('/', async (req, res) => {
+router.post('/', async (req, res, next) => {
     if(req.body.isAdmin === undefined) 
         req.body.isAdmin = false
 
@@ -33,11 +34,14 @@ router.post('/', async (req, res) => {
 
     const {error} = validate(req.body);
 
-    if(error) return res.status(400).send(error.details[0].message);
+    //if(error) return res.status(400).send(error.details[0].message);
+    if(error) res.status(422).send({message: error.details[0].message});
 
 
     let user = await User.findOne({ email: req.body.email });
-    if(user) return res.status(400).send("User already registered");
+    
+    if(user) 
+        return res.status(400).send({message: "User already registered!"});
 
     user = new User(_.pick(req.body, ['name', 'email', 'password', 'discount', 'isAdmin']));
     
