@@ -1,7 +1,7 @@
+const { boolean } = require('joi');
 const Joi = require('joi');
 Joi.objectId = require('joi-objectid')(Joi);
 const mongoose = require('mongoose');
-const moment = require('moment');
 const { categorySchema } = require('../models/category');
 const { typeSchema } = require('../models/type');
 
@@ -85,8 +85,32 @@ const orderSchema = new mongoose.Schema({
         type: {
             type: typeSchema,
             required: true
-        }  
-    }]
+        },
+        price: {
+            type: String,
+            required: true
+        },
+        currency: {
+            type: String,
+            required: true
+        }
+     
+    }],
+    qtyArray: [{
+        productId: {
+            type: String
+        },
+        qty: {
+            type: Number
+        }
+    }],
+    inCart: {
+        type: Boolean
+    },
+    date: {
+        type: Date
+    }
+
 });
 
 orderSchema.static.lookup = function(userId, productId) {
@@ -105,11 +129,16 @@ function validateOrder(order) {
         userId: Joi.objectId().required(),
         products: Joi.array().items({
             productId: Joi.objectId().required()
-        })
+        }),
+        qtyArray: Joi.array().items({
+            productId: Joi.string().required(),
+            qty: Joi.number().required()
+        }),
+        inCart: Joi.boolean().required()
     });
 
     return schema.validate(order);
-}
+} 
 
 exports.Order = Order;
 exports.validate = validateOrder

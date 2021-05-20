@@ -112,7 +112,9 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
             name: type.name,
             description: type.description,
             category: type.category
-        }
+        },
+        price:     req.body.price,
+        currency:  req.body.currency
     });    
 
     await product.save();
@@ -123,8 +125,10 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
     let picsArray = [];
     let docsArray = [];
 
-    req.files['image'].map(file => picsArray.push(file.path));
-    req.files['docs'].map(file => docsArray.push(file.path));
+    if(req.fiels != undefined)
+        req.files['image'].map(file => picsArray.push(file.path));
+    if(req.fiels!= undefined)
+        req.files['docs'].map(file => docsArray.push(file.path));
 
     
     const { error } = validate(req.body);
@@ -165,7 +169,9 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
                 name: type.name,
                 description: type.description,
                 category: type.category
-            }
+            },
+            price: req.body.price,
+            currency: req.body.currency
         }, 
     {
         new: true

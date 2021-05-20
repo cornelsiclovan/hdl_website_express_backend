@@ -79,7 +79,18 @@ const productSchema = new mongoose.Schema({
     type: {
         type: typeSchema,
         required: true
-    }   
+    },
+    price: {
+        type: String,
+        required: true
+    },
+    currency: {
+        type: String,
+        required: true
+    },
+    qtyInCart: {
+        type: Number
+    }
 });
 
 const Product = mongoose.model('Product', productSchema);
@@ -97,7 +108,9 @@ function validateProduct(product) {
         weight: Joi.string().min(1).max(100).required(),
         discountCategory: Joi.string().min(1).max(100).required(),
         categoryId: Joi.objectId().required(),
-        typeId : Joi.objectId().required()
+        typeId : Joi.objectId().required(),
+        price: Joi.string().required(),
+        currency: Joi.string().required()
     });
 
     return schema.validate(product);

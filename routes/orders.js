@@ -1,5 +1,5 @@
 const validateObjectId = require('../middleware/validateObjectId');
-const { Product } = require('../models/product');
+const { Product, productSchema } = require('../models/product');
 const { User } = require('../models/user');
 const { Order, validate } = require('../models/order');
 const express = require('express');
@@ -33,14 +33,17 @@ router.get('/user/:id', async (req, res) => {
     const userId = req.params.id;
     let userWithOrders;
 
+    let inCart = req.query.inCart;
+    console.log(inCart);
+
     try {
-        userWithOrders = await User.findById(userId).populate('orders');
+        userWithOrders = await User.findById(userId).populate({path: 'orders', match: {inCart: inCart}});
     } catch (error) {
         res.status(404).send('Fetching orders failed, try again later');
     }
 
     if(!userWithOrders || userWithOrders.orders.length === 0) {
-        res.status(404).send('Could not find places for this user');
+        res.status(404).send('Could not find orders for this user');
     }
 
     res.json({ orders: userWithOrders.orders.map(order => order.toObject({ getters: true }))});
@@ -54,13 +57,18 @@ router.post('/', async (req, res) => {
 
     const productIds = req.body.products.map(product => product.productId);
 
+
     const products = await Product.find().where('_id').in(productIds);
+
 
     if(!user) return res.status(400).send('Invalid user');
 
     let order = new Order({
         creator: user._id,
-        products: products
+        products: products,
+        qtyArray: req.body.qtyArray,
+        inCart: req.body.inCart,
+        date: new Date()
     });
 
     try {
@@ -76,5 +84,34 @@ router.post('/', async (req, res) => {
     }
 });
 
+router.put('/:id', async (req, res) => {
+    const { error } = validate(req.body);
+    if(error) return res.status(400).send(error.details[0].message);
+
+    const user = await User.findById(req.body.userId);
+
+    const productIds = req.body.products.map(product => product.productId);
+
+    const products = await Product.find().where('_id').in(productIds);
+
+
+    if(!user) return res.status(400).send('Invalid user');
+
+
+    const order = await Order.findByIdAndUpdate(
+        req.params.id,
+        {
+            creator: user._id,
+            products: products,
+            qtyArray: req.body.qtyArray,
+            inCart: req.body.inCart,
+            date: new Date()
+        }
+    )
+
+    if(!order) return res.status(404).send('The order with the give id was not found');
+
+    res.send(order);
+});
 
 module.exports = router;
