@@ -34,7 +34,7 @@ router.get('/user/:id', async (req, res) => {
     let userWithOrders;
 
     let inCart = req.query.inCart;
-    console.log(inCart);
+    //console.log(inCart);
 
     try {
         userWithOrders = await User.findById(userId).populate({path: 'orders', match: {inCart: inCart}});
