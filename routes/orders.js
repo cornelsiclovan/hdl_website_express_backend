@@ -43,7 +43,7 @@ router.get('/user/:id', async (req, res) => {
     }
 
     if(!userWithOrders || userWithOrders.orders.length === 0) {
-        res.status(404).send('Could not find orders for this user');
+        res.status(400).send({message: 'Could not find orders for this user'});
     }
 
     res.json({ orders: userWithOrders.orders.map(order => order.toObject({ getters: true }))});

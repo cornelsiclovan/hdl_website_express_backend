@@ -118,7 +118,7 @@ orderSchema.static.lookup = function(userId, productId) {
         'user._id': userId
     })
 }
-
+  
 
 const Order = mongoose.model('Order', orderSchema);
 
