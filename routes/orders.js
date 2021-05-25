@@ -97,7 +97,6 @@ router.put('/:id', async (req, res) => {
 
     if(!user) return res.status(400).send('Invalid user');
 
-
     const order = await Order.findByIdAndUpdate(
         req.params.id,
         {
