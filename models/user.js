@@ -31,7 +31,37 @@ const userSchema = mongoose.Schema({
         required: true,
         ref: 'Order'
     }],
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    phone: {
+        type: String,
+    },
+    companyName: {
+        type: String
+    },
+    organizationID: {
+        type: String
+    },
+    taxRegistrationID: {
+        type: String
+    },
+    billingAddress: {
+        type: String
+    },
+    billingAddressLine1: {
+        type: String
+    },
+    billingAddressLine2: {
+        type: String
+    },
+    city: {
+        type: String
+    },
+    postalCode: {
+        type: String
+    },
+    country: {
+        type: String
+    }
 });
 
 userSchema.methods.generateAuthToken = function() {
@@ -48,7 +78,17 @@ function validateUser(user) {
         name: Joi.string().min(5).max(255).required(),
         password: Joi.string().min(5).max(1024).required(),
         isAdmin: Joi.required(),
-        discount : Joi.required()
+        discount : Joi.required(),
+        phone: Joi.string(),
+        companyName: Joi.string(),
+        organizationID: Joi.string(),
+        taxRegistrationID: Joi.string(),
+        billingAddress: Joi.string(),
+        billingAddressLine1: Joi.string(),
+        billingAddressLine2: Joi.string(),
+        city: Joi.string(),
+        postalCode: Joi.string(),
+        country: Joi.string()
     });
 
     return schema.validate(user);

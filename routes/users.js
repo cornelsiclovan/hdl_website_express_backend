@@ -23,6 +23,8 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     const user = await User.findById(req.body.id);
+
+
 });
 
 router.post('/', async (req, res, next) => {
@@ -56,6 +58,34 @@ router.post('/', async (req, res, next) => {
         userId: user._id,
         token: token
     });
+});
+
+router.put('/:id', auth, async (req, res) => {
+    const userId = req.params.id;
+
+    const myuser = await User.findById(userId);
+
+    myuser.phone = req.body.phone;
+    myuser.companyName = req.body.companyName;
+    myuser.organizationID = req.body.organizationID;
+    myuser.taxRegistrationID = req.body.taxRegistrationID;
+    myuser.billingAddress = req.body.billingAddress;
+    myuser.billingAddressLine1 = req.body.billingAddressLine1;
+    myuser.billingAddressLine2 = req.body.billingAddressLine2;
+    myuser.city = req.body.city;
+    myuser.postalCode = req.body.postalCode;
+    myuser.country = req.body.country;
+
+    const user = await User.findByIdAndUpdate(
+        userId,
+        myuser,
+        {new: true}
+    );
+
+
+    res.send({
+        user
+    })
 });
 
 module.exports = router; 
