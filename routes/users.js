@@ -65,6 +65,7 @@ router.put('/:id', auth, async (req, res) => {
 
     const myuser = await User.findById(userId);
 
+    myuser.name = req.body.name;
     myuser.phone = req.body.phone;
     myuser.companyName = req.body.companyName;
     myuser.organizationID = req.body.organizationID;
@@ -81,7 +82,6 @@ router.put('/:id', auth, async (req, res) => {
         myuser,
         {new: true}
     );
-
 
     res.send({
         user
