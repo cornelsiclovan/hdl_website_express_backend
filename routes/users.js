@@ -88,4 +88,24 @@ router.put('/:id', auth, async (req, res) => {
     })
 });
 
+router.put('/change_password/:id', auth, async (req, res) => {
+    const userId = req.params.id;
+    const user = await User.findById(userId);
+    
+    const validPassword = await bcrypt.compare(req.body.old_password, user.password);
+    if(!validPassword) 
+        return res.status(400).send({message: 'Invalid password'});
+
+    if(req.body.new_password !== req.body.retype_new_password) 
+        return res.status(400).send({message: "Retyped password does not match"});
+
+
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(user.new_password, salt);
+
+    await user.save();
+
+    res.status(200).send({message: "password changed succesfull"});
+});
+
 module.exports = router; 

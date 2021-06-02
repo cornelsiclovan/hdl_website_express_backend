@@ -28,8 +28,28 @@ router.get('/:id', async (req, res) => {
     res.send(orders);
 });
 
+router.get('/user/:id/completed', auth, async (req, res) => {
+    const userId = req.params.id;
+    let userWithOrders;
+    let inCart = req.query.inCart;
+
+    try {
+        userWithOrders = await  User.findById(userId).populate({path: 'orders', match: {inCart: inCart}});
+    }catch(error) {
+        res.status(404).send('Fetching orders failed, try again later');
+    }
+
+    if(!userWithOrders || userWithOrders.orders.length === 0) {
+        res.status(400).send({message: 'Could not find orders for this user'});
+    }
+
+    res.json({ orders: userWithOrders.orders.map(order => order.toObject({ getters: true }))});
+}) 
+
 router.get('/user/:id', async (req, res) => {
     
+    console.log("alse here");
+
     const userId = req.params.id;
     let userWithOrders;
 
