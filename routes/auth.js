@@ -21,7 +21,8 @@ router.post('/', async (req, res) => {
     res.send({
         userId: user._id,
         discount: user.discount,
-        token: token
+        token: token,
+        isAdmin: user.isAdmin
     });
 });
 

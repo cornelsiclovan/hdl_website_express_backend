@@ -56,7 +56,9 @@ router.post('/', async (req, res, next) => {
     //res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email', 'isAdmin']));
     res.send({
         userId: user._id,
-        token: token
+        token: token,
+        isAdmin: user.isAdmin,
+        discount: user.discount
     });
 });
 
@@ -96,12 +98,15 @@ router.put('/change_password/:id', auth, async (req, res) => {
     if(!validPassword) 
         return res.status(400).send({message: 'Invalid password'});
 
-    if(req.body.new_password !== req.body.retype_new_password) 
+    console.log(req.body.new_password);
+    console.log(req.body.retype_new_password);
+
+    if(req.body.new_password  !== req.body.retype_new_password) 
         return res.status(400).send({message: "Retyped password does not match"});
 
 
     const salt = await bcrypt.genSalt(10);
-    user.password = await bcrypt.hash(user.new_password, salt);
+    user.password = await bcrypt.hash(req.body.new_password, salt);
 
     await user.save();
 
