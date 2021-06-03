@@ -109,6 +109,9 @@ const orderSchema = new mongoose.Schema({
     },
     date: {
         type: Date
+    },
+    status: {
+        type: String
     }
 
 });
@@ -134,7 +137,8 @@ function validateOrder(order) {
             productId: Joi.string().required(),
             qty: Joi.number().required()
         }),
-        inCart: Joi.boolean().required()
+        inCart: Joi.boolean().required(),
+        status: Joi.string()
     });
 
     return schema.validate(order);

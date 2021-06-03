@@ -77,6 +77,11 @@ router.post('/', async (req, res) => {
 
     const productIds = req.body.products.map(product => product.productId);
 
+    // status = 0 order set
+    // status = 1 order processed
+    // status = 2 order rejectet
+
+    const status = 0;
 
     const products = await Product.find().where('_id').in(productIds);
 
@@ -88,7 +93,8 @@ router.post('/', async (req, res) => {
         products: products,
         qtyArray: req.body.qtyArray,
         inCart: req.body.inCart,
-        date: new Date()
+        date: new Date(),
+        status: status
     });
 
     try {
