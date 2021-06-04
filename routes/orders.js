@@ -14,7 +14,7 @@ Fawn.init(mongoose);
 
 router.get('/', async (req, res) => {
     
-    const orders = await Order.find();
+    const orders = await Order.find({'status': req.query.status});
  
     res.send(orders);
 });
@@ -47,8 +47,7 @@ router.get('/user/:id/completed', auth, async (req, res) => {
 }) 
 
 router.get('/user/:id', async (req, res) => {
-    
-    console.log("alse here");
+
 
     const userId = req.params.id;
     let userWithOrders;
@@ -112,31 +111,44 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { error } = validate(req.body);
+    let order = null;
     if(error) return res.status(400).send(error.details[0].message);
 
-    const user = await User.findById(req.body.userId);
+    console.log(req.body.status);
 
-    const productIds = req.body.products.map(product => product.productId);
+    if(!req.body.status && !req.query.unreject) {
+ 
+        const user = await User.findById(req.body.userId);
 
-    const products = await Product.find().where('_id').in(productIds);
+        const productIds = req.body.products.map(product => product.productId);
 
+        const products = await Product.find().where('_id').in(productIds);
 
-    if(!user) return res.status(400).send('Invalid user');
+        if(!user) return res.status(400).send('Invalid user');
 
-    const order = await Order.findByIdAndUpdate(
-        req.params.id,
-        {
-            creator: user._id,
-            products: products,
-            qtyArray: req.body.qtyArray,
-            inCart: req.body.inCart,
-            date: new Date()
-        }
-    )
+        order = await Order.findByIdAndUpdate(
+            req.params.id,
+            {
+                creator: user._id,
+                products: products,
+                qtyArray: req.body.qtyArray,
+                inCart: req.body.inCart,
+                date: new Date()
+            }
+        )
+    }else { 
+
+        console.log('here');
+        
+        order = await Order.findById(req.params.id);
+        order.status = req.body.status;
+        order.save();
+        
+    } 
 
     if(!order) return res.status(404).send('The order with the give id was not found');
 
-    res.send(order);
+    res.send(order); 
 });
 
 module.exports = router;

@@ -22,7 +22,7 @@ const orderSchema = new mongoose.Schema({
             type: String,
             required: true,
             minlength: 5,
-            maxlength: 255
+            maxlength: 500
         },
         unitsInStock: {
             type: Number,
@@ -80,7 +80,7 @@ const orderSchema = new mongoose.Schema({
         },
         category: {
             type: categorySchema,
-            required: true
+            
         },
         type: {
             type: typeSchema,
@@ -129,16 +129,16 @@ const Order = mongoose.model('Order', orderSchema);
 function validateOrder(order) {
 
     const schema = Joi.object({
-        userId: Joi.objectId().required(),
+        userId: Joi.objectId(),
         products: Joi.array().items({
-            productId: Joi.objectId().required()
+            productId: Joi.objectId()
         }),
         qtyArray: Joi.array().items({
-            productId: Joi.string().required(),
-            qty: Joi.number().required()
+            productId: Joi.string(),
+            qty: Joi.number()
         }),
-        inCart: Joi.boolean().required(),
-        status: Joi.string()
+        inCart: Joi.boolean(),
+        status: Joi.number()
     });
 
     return schema.validate(order);
