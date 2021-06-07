@@ -14,10 +14,18 @@ Fawn.init(mongoose);
 
 router.get('/', async (req, res) => {
     
-    const orders = await Order.find({'status': req.query.status});
+    const orders = await Order.find({'status': req.query.status,
+                                     'inCart': req.query.inCart 
+                                     });
  
     res.send(orders);
 });
+
+router.get('/:id', async (req, res) => {
+    const order = await Order.findById(req.params.id);
+
+    res.send(order);
+})
 
 router.get('/:id', async (req, res) => {
 
@@ -149,6 +157,12 @@ router.put('/:id', async (req, res) => {
     if(!order) return res.status(404).send('The order with the give id was not found');
 
     res.send(order); 
+});
+
+router.delete('/:id', async (req, res) => {
+    await Order.findByIdAndDelete(req.params.id);
+
+    res.send({delete: 'ok'});
 });
 
 module.exports = router;
