@@ -15,8 +15,14 @@ router.get('/me', auth, async (req, res) => {
     res.send(user);
 });
 
-router.get('/', async (req, res) => {
-    const users = await User.find();
+router.get('/admin/:id', auth, async (req, res) => {
+    const adminUser = await User.find({_id: req.params.id});
+
+    if(!adminUser[0].isAdmin) {
+        res.send({'error': 'no admin here'})
+    }
+
+    const users = await User.find({isAdmin: false});
 
     res.send(users);
 });
@@ -68,17 +74,23 @@ router.put('/:id', auth, async (req, res) => {
 
     const myuser = await User.findById(userId);
 
-    myuser.name = req.body.name;
-    myuser.phone = req.body.phone;
-    myuser.companyName = req.body.companyName;
-    myuser.organizationID = req.body.organizationID;
-    myuser.taxRegistrationID = req.body.taxRegistrationID;
-    myuser.billingAddress = req.body.billingAddress;
-    myuser.billingAddressLine1 = req.body.billingAddressLine1;
-    myuser.billingAddressLine2 = req.body.billingAddressLine2;
-    myuser.city = req.body.city;
-    myuser.postalCode = req.body.postalCode;
-    myuser.country = req.body.country;
+    
+    if(req.body.discount) {
+        myuser.discount = req.body.discount;
+    } else {
+
+        myuser.name = req.body.name;
+        myuser.phone = req.body.phone;
+        myuser.companyName = req.body.companyName;
+        myuser.organizationID = req.body.organizationID;
+        myuser.taxRegistrationID = req.body.taxRegistrationID;
+        myuser.billingAddress = req.body.billingAddress;
+        myuser.billingAddressLine1 = req.body.billingAddressLine1;
+        myuser.billingAddressLine2 = req.body.billingAddressLine2;
+        myuser.city = req.body.city;
+        myuser.postalCode = req.body.postalCode;
+        myuser.country = req.body.country;
+    }
 
     const user = await User.findByIdAndUpdate(
         userId,
