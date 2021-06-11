@@ -73,8 +73,7 @@ const productSchema = new mongoose.Schema({
         type: [String]
     },
     category: {
-        type: categorySchema,
-        required: true
+        type: categorySchema
     },
     type: {
         type: typeSchema,
@@ -107,7 +106,7 @@ function validateProduct(product) {
         depth: Joi.string().min(1).max(100).required(),
         weight: Joi.string().min(1).max(100).required(),
         discountCategory: Joi.string().min(1).max(100).required(),
-        categoryId: Joi.objectId().required(),
+        categoryId: Joi.objectId(),
         typeId : Joi.objectId().required(),
         price: Joi.string().required(),
         currency: Joi.string().required()

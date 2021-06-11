@@ -1,7 +1,7 @@
 const validateObjectId = require('../middleware/validateObjectId');
 const { Type } = require('../models/type');
 const { Category } = require('../models/category');
-const { Product, validate } = require('../models/product');
+const { Product, validate, productSchema } = require('../models/product');
 const express = require('express');
 
 const router = express.Router();
@@ -125,7 +125,7 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
     let picsArray = [];
     let docsArray = [];
 
-    if(req.fiels != undefined)
+    if(req.files != undefined)
         req.files['image'].map(file => picsArray.push(file.path));
     if(req.fiels!= undefined)
         req.files['docs'].map(file => docsArray.push(file.path));
@@ -144,43 +144,92 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
     if(!category)
         return res.status(400).send('Invalid category.');
 
-    const product = await Product.findByIdAndUpdate(
-        req.params.id, 
-        {
-            name: req.body.name,
-            description: req.body.description,
-            unitsInStock: req.body.unitsInStock,
-            sku: req.body.sku,
-            bus_power: req.body.bus_power,
-            width: req.body.width, 
-            height: req.body.height,
-            depth: req.body.depth,
-            weight: req.body.weight,
-            discountCategory: req.body.discountCategory,
-            image: picsArray,
-            docs: docsArray,
-            category: {
-                _id: category._id,
-                name: category.name,
-                description: category.description
-            },
-            type: {
-                _id: type._id, 
-                name: type.name,
-                description: type.description,
-                category: type.category
-            },
-            price: req.body.price,
-            currency: req.body.currency
-        }, 
-    {
-        new: true
-    });
+    // const product = await Product.findByIdAndUpdate(
+    //     req.params.id, 
+    //     {
+    //         name: req.body.name,
+    //         description: req.body.description,
+    //         unitsInStock: req.body.unitsInStock,
+    //         sku: req.body.sku,
+    //         bus_power: req.body.bus_power,
+    //         width: req.body.width, 
+    //         height: req.body.height,
+    //         depth: req.body.depth,
+    //         weight: req.body.weight,
+    //         discountCategory: req.body.discountCategory,
+    //         image: picsArray,
+    //         docs: docsArray,
+    //         category: {
+    //             _id: category._id,
+    //             name: category.name,
+    //             description: category.description
+    //         },
+    //         type: {
+    //             _id: type._id, 
+    //             name: type.name,
+    //             description: type.description,
+    //             category: type.category
+    //         },
+    //         price: req.body.price,
+    //         currency: req.body.currency
+    //     }, 
+    // {
+    //     new: true
+    // }); 
+
+    const product = await Product.findById(req.params.id);
+
+
+
+    product.name = req.body.name;
+    product.description = req.body.description;
+    product.unitsInStock = req.body.unitsInStock;
+    product.sku = req.body.sku;
+    product.bus_power = req.body.bus_power;
+    product.width = req.body.width;
+    product.height = req.body.height;
+    product.depth = req.body.depth;
+    product.weight = req.body.weight;
+    product.discountCategory = req.body.discountCategory;
+
+    if(picsArray.length !== 0)
+        product.image = req.body.picsArray;
+    
+    if(docsArray.length !== 0)
+        product.docs = req.body.docsArray;
+    
+    product.category = {
+        _id: category._id,
+        name: category.name,
+        description: category.description
+    };
+    product.type = { 
+        _id: type._id, 
+        name: type.name,
+        description: type.description,
+        category: type.category
+    };
+    product.price = req.body.price;
+    product.currency = req.body.currency;
+
+    product.save();
 
     if(!product)
         return res.status(404).send('The type with this id is not found');
 
     res.send(product);
+}); 
+
+router.put('/unitsInStock/:id', auth, async(req, res) => {
+    const product = await Product.findById(req.params.id);
+
+    product.unitsInStock = req.body.unitsInStock;
+
+    product.markModified("unitsInStock");
+
+    product.save();
+
+    res.send({'ok': 'ok'})
 });
 
 router.delete('/:id', async (req, res) => {

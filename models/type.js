@@ -16,8 +16,7 @@ const typeSchema = new mongoose.Schema({
         maxlength: 1000
     },
     category: {
-        type: categorySchema,
-        required: true
+        type: categorySchema
     },
 });
 
@@ -28,7 +27,7 @@ function validateType(type) {
     const schema = Joi.object({
         name: Joi.string().min(3).max(50).required(),
         description: Joi.string().min(5).max(1000).required(),
-        categoryId: Joi.objectId().required(),
+        categoryId: Joi.objectId(),
     });
 
     return schema.validate(type);
