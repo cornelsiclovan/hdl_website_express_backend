@@ -73,6 +73,8 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
     let picsArray = [];
     let docsArray = [];
 
+    console.log(req.files);
+
     req.files['image'].map(file => picsArray.push(file.path));
     req.files['docs'].map(file => docsArray.push(file.path));
 
