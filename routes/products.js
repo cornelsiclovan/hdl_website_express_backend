@@ -8,6 +8,7 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const fileUpload = require('../middleware/file-upload');
+const fs = require('fs');
 
 router.get('/', async (req, res) => {
     const page = req.query.page || 1;
@@ -22,6 +23,16 @@ router.get('/:id', async (req, res) => {
     const product = await Product.findById(req.params.id);
     
     if(!product) return res.status(404).send('The product with this id is not found.');
+
+    // let blobImages = [];
+
+    // product.image.map(async i => {
+    //     const response = fetch ("http:\\\\localhost:3001\\" + i);
+    //     let blobImage = await response.blob();
+    //     blobImages.push(blob);
+    // })
+
+    // product.blobImages = blobImages;
 
     res.send(product);
 });
@@ -73,7 +84,7 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
     let picsArray = [];
     let docsArray = [];
 
-    console.log(req.files);
+    //console.log(req.files);
 
     req.files['image'].map(file => picsArray.push(file.path));
     req.files['docs'].map(file => docsArray.push(file.path));
@@ -127,10 +138,12 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
     let picsArray = [];
     let docsArray = [];
 
+    console.log(req.files);
+
     if(req.files != undefined)
         req.files['image'].map(file => picsArray.push(file.path));
-    if(req.fiels!= undefined)
-        req.files['docs'].map(file => docsArray.push(file.path));
+    // if(req.fiels!= undefined)
+    //     req.files['docs'].map(file => docsArray.push(file.path));
 
     
     const { error } = validate(req.body);
@@ -195,16 +208,18 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
     product.discountCategory = req.body.discountCategory;
 
     if(picsArray.length !== 0)
-        product.image = req.body.picsArray;
+        product.image = picsArray;
     
-    if(docsArray.length !== 0)
-        product.docs = req.body.docsArray;
+
+    // if(docsArray.length !== 0)
+    //     product.docs = req.body.docsArray;
     
     product.category = {
         _id: category._id,
         name: category.name,
         description: category.description
     };
+
     product.type = { 
         _id: type._id, 
         name: type.name,
@@ -234,8 +249,31 @@ router.put('/unitsInStock/:id', auth, async(req, res) => {
     res.send({'ok': 'ok'})
 });
 
+
+router.get('/:id/images/:name', async(req, res) => {
+    const product = await Product.findById(req.params.id);
+    const image = product.image.filter(image => image === "uploads\\images\\"+req.params.name);
+
+    let imageData = [];
+
+    await fs.readFile(image[0], (error, data) => {
+        if(error) {
+            throw error;
+        }
+        
+       imageData.push(data);
+       res.send(data);
+    })
+
+    
+  
+})
+
+
 router.delete('/:id', async (req, res) => {
 
 });
+
+
 
 module.exports = router;
