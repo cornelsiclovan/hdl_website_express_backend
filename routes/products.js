@@ -83,11 +83,17 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
 
     let picsArray = [];
     let docsArray = [];
+    let docsNameArray = [];
 
-    //console.log(req.files);
+    req.files['image'].map(file =>{ 
+        picsArray.push(file.path)
+    });
 
-    req.files['image'].map(file => picsArray.push(file.path));
-    req.files['docs'].map(file => docsArray.push(file.path));
+    req.files['docs'].map(file =>{
+        console.log(file);
+        docsNameArray.push(file.originalname);
+        docsArray.push(file.path)
+    } );
 
     const { error } = validate(req.body);
     if(error)
@@ -115,6 +121,7 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
         discountCategory: req.body.discountCategory,
         image: picsArray,
         docs: docsArray,
+        docNames: docsNameArray,
         category: {
             _id: category._id,
             name: category.name,
@@ -264,11 +271,24 @@ router.get('/:id/images/:name', async(req, res) => {
        imageData.push(data);
        res.send(data);
     })
-
-    
-  
 })
 
+
+router.get('/:id/docs/:name', async(req, res) => {
+    const product = await Product.findById(req.params.id);
+    const docs = product.docs.filter(doc => doc === "uploads\\documents\\"+req.params.name);
+
+    let docData = [];
+
+    await fs.readFile(docs[0], (error, data) => {
+        if(error) {
+            throw error;
+        }
+        
+       docData.push(data);
+       res.send(data);
+    })
+})
 
 router.delete('/:id', async (req, res) => {
 

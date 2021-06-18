@@ -72,6 +72,9 @@ const productSchema = new mongoose.Schema({
     docs: {
         type: [String]
     },
+    docNames: {
+        type: [String]
+    },
     category: {
         type: categorySchema
     },
