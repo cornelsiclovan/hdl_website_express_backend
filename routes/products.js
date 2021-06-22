@@ -144,15 +144,20 @@ router.post('/', [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs
 router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'docs', maxCount: 12} ]), auth], async (req, res) => {
     let picsArray = [];
     let docsArray = [];
+    let docsNameArray = [];
 
     console.log(req.files);
 
     if(req.files != undefined)
         req.files['image'].map(file => picsArray.push(file.path));
-    // if(req.fiels!= undefined)
-    //     req.files['docs'].map(file => docsArray.push(file.path));
-
     
+    if(req.files != undefined)
+        req.files['docs'].map(file =>{
+            console.log(file);
+            docsNameArray.push(file.originalname);
+            docsArray.push(file.path)
+        } );
+
     const { error } = validate(req.body);
     if(error)
        return res.status(400).send(error.details[0].message);
@@ -218,8 +223,10 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
         product.image = picsArray;
     
 
-    // if(docsArray.length !== 0)
-    //     product.docs = req.body.docsArray;
+    if(docsArray.length !== 0)
+        product.docs = req.body.docsArray;
+    
+    product.docNames = docsNameArray;
     
     product.category = {
         _id: category._id,
