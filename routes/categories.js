@@ -14,6 +14,12 @@ router.get('/', async(req, res) => {
      res.send(categories);
 });
 
+
+router.get('/:id', async(req, res) => {
+    const category = await Category.findById(req.params.id);
+    res.send(category);
+});
+
 router.post('/', auth, async (req, res) => {
     const {error} = validate(req.body);
     if(error) 
@@ -49,8 +55,7 @@ router.delete('/:id', [auth, admin], validateObjectId, async (req, res) => {
     
     const product = await Product.find({'category._id': req.params.id});
     const type    = await Type.find({'category._id': req.params.id});
-
-    console.log(product[0]);
+    
     if(product[0]) {
         return res.status(404).send({message: 'Cannot delete this category. Products are registered in this category.'});
     }
