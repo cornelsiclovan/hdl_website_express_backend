@@ -224,7 +224,7 @@ router.put('/:id',  [fileUpload.fields([{name: 'image', maxCount: 12}, {name: 'd
     
 
     if(docsArray.length !== 0)
-        product.docs = req.body.docsArray;
+        product.docs = docsArray;
     
     product.docNames = docsNameArray;
     
@@ -297,8 +297,11 @@ router.get('/:id/docs/:name', async(req, res) => {
     })
 })
 
-router.delete('/:id', async (req, res) => {
+router.delete('/:id',  [auth, admin], async (req, res) => {
+    const product = await Product.findByIdAndDelete(req.params.id);
+        
 
+    res.send(product);
 });
 
 
