@@ -299,9 +299,20 @@ router.get('/:id/docs/:name', async(req, res) => {
 
 router.delete('/:id',  [auth, admin], async (req, res) => {
     const product = await Product.findByIdAndDelete(req.params.id);
-        
+     
+    product.image.map(imagePath => {
+        fs.unlink(imagePath, err => {
+            console.log(err);
+        })
+    })
 
-    res.send(product);
+    product.docs.map(docPath => {
+        fs.unlink(docPath, err => {
+            console.log(err);
+        })
+    })
+
+    res.send({message: 'Deleted product'});
 });
 
 
