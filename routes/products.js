@@ -24,16 +24,6 @@ router.get('/:id', async (req, res) => {
     
     if(!product) return res.status(404).send('The product with this id is not found.');
 
-    // let blobImages = [];
-
-    // product.image.map(async i => {
-    //     const response = fetch ("http:\\\\localhost:3001\\" + i);
-    //     let blobImage = await response.blob();
-    //     blobImages.push(blob);
-    // })
-
-    // product.blobImages = blobImages;
-
     res.send(product);
 });
  

@@ -18,8 +18,6 @@ router.get('/category/:id', async (req, res) => {
 
     let types;
 
-   // console.log(categoryId);
-
     try {
         types = await Type.find({'category._id': categoryId});
     } catch(error) {
