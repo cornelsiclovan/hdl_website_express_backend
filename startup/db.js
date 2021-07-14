@@ -7,6 +7,13 @@ dotenv.config();
 module.exports = function() {
     const db = config.get('db');
     
-    mongoose.connect(`mongodb://${process.env.MONGODB_HOST}/hdl_db`).
+    let mongoose_uri='';
+    if (process.env.MONGODB_USER && process.env.MONGODB_USER.length > 0 && process.env.MONGODB_PASSWORD && process.env.MONGODB_PASSWORD.length > 0) {
+        mongoose_uri=`mongodb://${process.env.MONGODB_USER}:${process.env.MONGODB_PASSWORD}@${process.env.MONGODB_HOST}/${process.env.MONGODB_DATABASE}`
+    } else {
+        mongoose_uri=`mongodb://${process.env.MONGODB_HOST}/${process.env.MONGODB_DATABASE}`
+    }
+
+    mongoose.connect(mongoose_uri).
         then(() => winston.info(`Connected to ${db}...`))
 }
